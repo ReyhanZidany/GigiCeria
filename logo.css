@@ -1,0 +1,307 @@
+/* Enhanced Logo Styles */
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.logo-link:hover::before {
+    left: 100%;
+}
+
+.logo-link:hover {
+    transform: translateY(-2px);
+    background: rgba(74, 144, 226, 0.05);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+}
+
+.logo-link:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    border-radius: 8px;
+}
+
+.logo-link:hover .logo-img {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.nav-logo h2 {
+    color: #4a90e2;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: 0;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #4a90e2, #667eea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo-link:hover h2 {
+    transform: translateX(3px);
+    background: linear-gradient(135deg, #357abd, #5a67d8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Enhanced Navigation Links */
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4a90e2, #667eea);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    left: 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+}
+
+/* Loading Animation untuk Logo */
+.logo-img.loading {
+    animation: logoLoading 1.5s ease-in-out;
+}
+
+@keyframes logoLoading {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    25% {
+        transform: scale(1.1) rotate(5deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2) rotate(-5deg);
+        opacity: 0.6;
+    }
+    75% {
+        transform: scale(1.1) rotate(3deg);
+        opacity: 0.8;
+    }
+}
+
+/* Pulse Effect untuk Brand */
+.logo-link.pulse {
+    animation: logoPulse 2s infinite;
+}
+
+@keyframes logoPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(74, 144, 226, 0);
+    }
+}
+
+/* Breadcrumb Style untuk Current Page */
+.nav-container::after {
+    content: attr(data-current-page);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(74, 144, 226, 0.1);
+    color: #4a90e2;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.nav-container.show-breadcrumb::after {
+    opacity: 1;
+}
+
+/* User Session Info */
+.user-session {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    color: #666;
+    border: 1px solid #e9ecef;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 1001;
+    min-width: 200px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container:hover .user-session {
+    opacity: 1;
+    transform: translateY(5px);
+}
+
+.user-session::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #e9ecef;
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
+}
+
+/* Mobile Responsive Enhancements */
+@media (max-width: 768px) {
+    .logo-img {
+        height: 38px;
+    }
+    
+    .nav-logo h2 {
+        font-size: 1.4rem;
+    }
+    
+    .logo-link {
+        gap: 10px;
+        padding: 6px 10px;
+    }
+    
+    .nav-link {
+        padding: 12px 20px;
+        margin: 5px 0;
+        border-radius: 15px;
+    }
+    
+    .user-session {
+        position: fixed;
+        top: 80px;
+        right: 10px;
+        min-width: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-img {
+        height: 32px;
+    }
+    
+    .nav-logo h2 {
+        font-size: 1.2rem;
+    }
+    
+    .logo-link {
+        gap: 8px;
+        padding: 5px 8px;
+    }
+}
+
+/* Accessibility Enhancements */
+.logo-link:focus,
+.nav-link:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+}
+
+.logo-link:focus-visible,
+.nav-link:focus-visible {
+    outline: 2px solid #ff6b6b;
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .logo-img {
+        height: 30px;
+        filter: grayscale(100%);
+    }
+    
+    .nav-logo h2 {
+        color: #000 !important;
+        -webkit-text-fill-color: #000 !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .logo-link {
+        border: 2px solid #4a90e2;
+    }
+    
+    .nav-logo h2 {
+        color: #000 !important;
+        -webkit-text-fill-color: #000 !important;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .logo-img,
+    .logo-link,
+    .nav-link {
+        transition: none;
+        animation: none;
+    }
+}

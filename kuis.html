@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis </title>
+    <link rel="icon" type="image/png" sizes="32x32" href="sehatsari.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="sehatsari.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="sehatsari.png">
+    <link rel="shortcut icon" href="sehatsari.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <script src="navbar-loader.js"></script>
+</head>
+<body>
+    <main class="main-content">
+        <section class="quiz-section">
+            <div class="quiz-header">
+                <h1>Kuis Kesehatan Gigi 🧠</h1>
+                <p>Uji pengetahuanmu tentang kesehatan gigi dan mulut!</p>
+                <div class="quiz-info">
+                    <span class="quiz-count">📊 10 Soal</span>
+                    <span class="quiz-time">⏰ Tanpa Batas Waktu</span>
+                    <span class="quiz-attempts">🚫 Tidak Bisa Mengulang</span>
+                </div>
+            </div>
+
+            <div id="quizStart" class="quiz-start">
+                <div class="start-container">
+                    <h2>Siap untuk Tantangan? 🚀</h2>
+                    <div class="quiz-rules">
+                        <h3>Aturan Kuis:</h3>
+                        <ul>
+                            <li>✅ 10 soal pilihan ganda</li>
+                            <li>✅ Setiap soal bernilai 10 poin</li>
+                            <li>✅ Tidak ada batas waktu</li>
+                            <li>❌ Tidak bisa mengulang jawaban</li>
+                            <li>❌ Tidak bisa mengulang kuis</li>
+                        </ul>
+                    </div>
+                    <button id="startQuizBtn" class="btn btn-primary btn-large">Mulai Kuis</button>
+                </div>
+            </div>
+
+            <div id="quizContainer" class="quiz-container" style="display: none;">
+                <div class="quiz-progress">
+                    <div class="progress-info">
+                        <span id="currentQuestion">1</span> dari <span id="totalQuestions">10</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div id="quizProgressBar" class="progress-bar" style="width: 10%;"></div>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <h2 id="questionText">Loading...</h2>
+                    <div id="answersContainer" class="answers-container">
+                        <!-- Jawaban akan diisi oleh JavaScript -->
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button id="nextBtn" class="btn btn-primary" style="display: none;">Soal Berikutnya</button>
+                </div>
+            </div>
+
+            <div id="quizResult" class="quiz-result" style="display: none;">
+                <div class="result-container">
+                    <h2>Hasil Kuis Kamu! 🎉</h2>
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span id="finalScore">0</span>
+                            <span class="score-max">/100</span>
+                        </div>
+                    </div>
+                    <div id="scoreMessage" class="score-message"></div>
+                    <div id="resultBadge" class="result-badge"></div>
+                    
+                    <div class="result-actions">
+                        <a href="materi.html" class="btn btn-secondary">Pelajari Lagi</a>
+                        <a href="index.html" class="btn btn-primary">Kembali ke Beranda</a>
+                    </div>
+                    
+                    <div class="result-note">
+                        <p><strong>Catatan:</strong> Kamu sudah menyelesaikan kuis dan tidak bisa mengulanginya lagi. Tetap semangat belajar! 💪</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quizCompleted" class="quiz-completed" style="display: none;">
+                <div class="completed-container">
+                    <h2>Kuis Sudah Diselesaikan ✅</h2>
+                    <p>Kamu sudah menyelesaikan kuis sebelumnya dan tidak bisa mengulanginya lagi.</p>
+                    <div class="previous-score">
+                        <h3>Skor Terakhir:</h3>
+                        <div class="score-display">
+                            <div class="score-circle">
+                                <span id="previousScore">0</span>
+                                <span class="score-max">/100</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="completed-actions">
+                        <a href="materi.html" class="btn btn-secondary">Baca Materi Lagi</a>
+                        <a href="tutorial.html" class="btn btn-secondary">Lihat Tutorial</a>
+                        <a href="index.html" class="btn btn-primary">Kembali ke Beranda</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 GigiPintar Padangsari - Program Edukasi Kesehatan Gigi</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="quiz.js"></script>
+</body>
+</html>
