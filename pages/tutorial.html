@@ -4,16 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutorial</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="sehatsari.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="sehatsari.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="sehatsari.png">
-    <link rel="shortcut icon" href="sehatsari.png">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
-    <script src="navbar-loader.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/sehatsari.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/sehatsari.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/sehatsari.png">
+    <link rel="shortcut icon" href="../assets/images/sehatsari.png">
+    
+    <!-- Font Preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/navbar-loader.js"></script>
 </head>
 <body>
     <!-- Navbar akan di-load otomatis -->
+    
+    <!-- Audio Elements untuk Timer -->
+    <audio id="brushSong" loop preload="auto">
+        <source src="../assets/audio/brush-song.mp3" type="audio/mpeg">
+        <source src="../assets/audio/brush-song.ogg" type="audio/ogg">
+        <!-- Fallback jika tidak ada file audio lokal -->
+    </audio>
+    
+    <audio id="timerEndSound" preload="auto">
+        <source src="../assets/audio/timer-end.mp3" type="audio/mpeg">
+        <source src="../assets/audio/timer-end.ogg" type="audio/ogg">
+    </audio>
     
     <main class="main-content">
         <section class="page-header">
@@ -30,7 +47,7 @@
                 <div class="video-container">
                     <div class="video-wrapper">
                         <iframe 
-                            src="https://www.youtube-nocookie.com/embed/VlXabYhFz90?enablejsapi=1&si=WWM730-ngOQiRbq5&origin=https://gigipintar-padangsari.com" 
+                            src="https://www.youtube-nocookie.com/embed/VlXabYhFz90?enablejsapi=1&si=WWM730-ngOQiRbq5" 
                             title="Tutorial Cara Sikat Gigi yang Benar untuk Anak"
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -55,7 +72,7 @@
                         <div class="video-card">
                             <div class="video-thumbnail">
                                 <iframe 
-                                    src="https://www.youtube-nocookie.com/embed//l_4_yrp_mk8?si=t5tZx1gRxBhjg-is=https://gigipintar-padangsari.com" 
+                                    src="https://www.youtube-nocookie.com/embed/l_4_yrp_mk8?si=t5tZx1gRxBhjg-is" 
                                     title="Lagu Sikat Gigi untuk Anak"
                                     frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -69,7 +86,7 @@
                         <div class="video-card">
                             <div class="video-thumbnail">
                                 <iframe 
-                                    src="https://www.youtube-nocookie.com/embed/B6JnZt7NA5c?si=uSTWMRwtidH-G22l=https://gigipintar-padangsari.com" 
+                                    src="https://www.youtube-nocookie.com/embed/B6JnZt7NA5c?si=uSTWMRwtidH-G22l" 
                                     title="Pentingnya Menjaga Kesehatan Gigi"
                                     frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -83,7 +100,7 @@
                         <div class="video-card">
                             <div class="video-thumbnail">
                                 <iframe 
-                                    src="https://www.youtube-nocookie.com/embed/-GIgihj-fZM?si=_6JxzEZje_KkBaAo=https://gigipintar-padangsari.com" 
+                                    src="https://www.youtube-nocookie.com/embed/-GIgihj-fZM?si=_6JxzEZje_KkBaAo" 
                                     title="Makanan Sehat untuk Gigi"
                                     frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -97,7 +114,7 @@
                 </div>
             </div>
 
-            <!-- Tutorial Steps (existing content) -->
+            <!-- Tutorial Steps -->
             <div class="tutorial-intro">
                 <h2>Yang Kamu Butuhkan:</h2>
                 <div class="supplies-grid">
@@ -124,9 +141,6 @@
                 </div>
             </div>
 
-            <!-- Rest of tutorial steps remain the same -->
-            <!-- ... (existing step cards) ... -->
-
             <!-- Interactive Practice Section -->
             <div class="practice-section">
                 <h2>🎮 Praktek Interaktif</h2>
@@ -134,7 +148,7 @@
                     <div class="practice-item">
                         <div class="practice-icon">📱</div>
                         <h3>Gunakan Timer</h3>
-                        <p>Praktekkan sikat gigi sambil menonton video dan gunakan timer 2 menit</p>
+                        <p>Praktekkan sikat gigi sambil mendengarkan lagu dan gunakan timer 2 menit</p>
                         <button id="startPractice" class="btn btn-primary">Mulai Praktek</button>
                     </div>
                     
@@ -150,22 +164,42 @@
                 </div>
             </div>
 
-            <!-- Timer Section (existing) -->
+            <!-- Enhanced Timer Section -->
             <div class="timer-section">
-                <h2>Timer Sikat Gigi 2 Menit</h2>
+                <h2>🎵 Timer Sikat Gigi dengan Lagu</h2>
                 <div class="timer-container">
                     <div class="timer-display" id="timerDisplay">02:00</div>
+                    <div class="timer-status" id="timerStatus">Siap untuk memulai!</div>
                     <div class="timer-controls">
-                        <button id="startTimer" class="btn btn-primary">Mulai Timer</button>
-                        <button id="resetTimer" class="btn btn-secondary">Reset</button>
+                        <button id="startTimer" class="btn btn-primary">
+                            <span class="btn-icon">▶️</span>
+                            Mulai Timer
+                        </button>
+                        <button id="pauseTimer" class="btn btn-secondary" style="display: none;">
+                            <span class="btn-icon">⏸️</span>
+                            Pause
+                        </button>
+                        <button id="resetTimer" class="btn btn-secondary">
+                            <span class="btn-icon">🔄</span>
+                            Reset
+                        </button>
+                        <button id="muteButton" class="btn btn-secondary">
+                            <span class="btn-icon">🔊</span>
+                            Suara ON
+                        </button>
                     </div>
                     <div class="timer-progress">
                         <div class="progress-bar" id="progressBar"></div>
                     </div>
+                    <div class="volume-control">
+                        <label for="volumeSlider">Volume:</label>
+                        <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                        <span id="volumeValue">50%</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Practice Tips (existing) -->
+            <!-- Practice Tips -->
             <div class="practice-tips">
                 <h2>Tips Tambahan untuk Gigi Sehat</h2>
                 <div class="tips-list">
@@ -200,8 +234,8 @@
         <p>&copy; 2025 GigiPintar Padangsari - Program Edukasi Kesehatan Gigi</p>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="timer.js"></script>
-    <script src="video-handler.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/timer-with-music.js"></script>
+    <script src="../js/video-handler.js"></script>
 </body>
 </html>

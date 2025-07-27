@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="nav-container">
                     <div class="nav-logo">
                         <a href="index.html" class="logo-link">
-                            <img src="sehatsari.png" alt="SehatSari Logo" class="logo-img" onerror="this.style.display='none'">
+                            <img src="../assets/images/sehatsari.png" alt="SehatSari Logo" class="logo-img" onerror="this.style.display='none'">
                             <h2 class="logo-text">GigiPintar</h2>
                         </a>
                     </div>
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(link);
         
         const logoImg = new Image();
-        logoImg.src = 'sehatsari.png';
+        logoImg.src = '../assets/images/sehatsari.png';
     }
     
     preloadResources();
