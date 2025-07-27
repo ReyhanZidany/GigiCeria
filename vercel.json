@@ -1,0 +1,26 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/pages/index.html"
+    },
+    {
+      "source": "/tutorial",
+      "destination": "/pages/tutorial.html"
+    },
+    {
+      "source": "/kuis",
+      "destination": "/pages/kuis.html"
+    },
+    {
+      "source": "/materi",
+      "destination": "/pages/materi.html"
+    },
+    {
+      "source": "/tentang",
+      "destination": "/pages/tentang.html"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
