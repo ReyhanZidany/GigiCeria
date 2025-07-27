@@ -1,19 +1,87 @@
-// Navbar Loader dengan Font Management
+// Navbar Loader dengan Font Management - FIXED VERSION
 document.addEventListener('DOMContentLoaded', function() {
-    // Font loading management
+    // Tambahkan CSS critical path untuk mencegah layout shift
+    const criticalCSS = `
+        <style id="navbar-critical">
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            opacity: 1;
+            visibility: visible;
+            transition: none;
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 60px;
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            padding: 0 16px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .logo-link {
+            display: flex !important;
+            align-items: center !important;
+            text-decoration: none !important;
+            border: none !important;
+        }
+        .logo-text {
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 1.5rem !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 1 !important;
+        }
+        </style>
+    `;
+    
+    // Inject critical CSS immediately
+    document.head.insertAdjacentHTML('beforeend', criticalCSS);
+    
+    // Font loading management - Optimized
     const fontLoader = {
         loaded: false,
         
         init() {
+            // Check if fonts are already loaded
+            if (document.documentElement.classList.contains('fonts-loaded')) {
+                this.loaded = true;
+                return;
+            }
+            
             if (document.fonts && document.fonts.ready) {
                 document.fonts.ready.then(() => {
                     this.onFontsLoaded();
                 });
+                
+                // Fallback timeout
+                setTimeout(() => {
+                    if (!this.loaded) {
+                        this.onFontsLoaded();
+                    }
+                }, 500); // Reduced from 1000ms
             } else {
                 setTimeout(() => {
                     this.onFontsLoaded();
-                }, 1000);
+                }, 300); // Reduced timeout
             }
+            
             document.documentElement.classList.add('fonts-loading');
         },
         
@@ -27,14 +95,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     fontLoader.init();
     
-    function loadNavbar() {
-        if (document.querySelector('.navbar')) {
-            console.log('ℹ️ Navbar already exists');
-            initializeNavbar();
-            return;
+    // Preload navbar immediately
+    function preloadNavbar() {
+        if (window.navbarCache) {
+            return Promise.resolve(window.navbarCache);
         }
         
-        fetch('navbar.html')
+        return fetch('navbar.html')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -42,14 +109,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.text();
             })
             .then(data => {
+                window.navbarCache = data; // Cache the navbar
+                return data;
+            });
+    }
+    
+    function loadNavbar() {
+        if (document.querySelector('.navbar')) {
+            console.log('ℹ️ Navbar already exists');
+            initializeNavbar();
+            return;
+        }
+        
+        preloadNavbar()
+            .then(data => {
+                // Insert navbar without delay
                 document.body.insertAdjacentHTML('afterbegin', data);
                 
-                if (fontLoader.loaded) {
-                    setupNavbar();
-                } else {
-                    setTimeout(setupNavbar, 100);
-                }
-                
+                // Setup immediately
+                setupNavbar();
                 console.log('✅ Navbar loaded successfully');
             })
             .catch(error => {
@@ -59,37 +137,64 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function setupNavbar() {
-        setActivePage();
-        initializeNavbar();
-        ensureLogoStyling();
+        // Force immediate styling
+        requestAnimationFrame(() => {
+            ensureLogoStyling();
+            setActivePage();
+            initializeNavbar();
+        });
     }
     
     function ensureLogoStyling() {
         const logoLink = document.querySelector('.logo-link');
         const logoText = document.querySelector('.logo-text');
+        const navLinks = document.querySelectorAll('.nav-link');
         
         if (logoLink) {
-            // Force logo link styling
-            logoLink.style.textDecoration = 'none';
-            logoLink.style.border = 'none';
-            logoLink.style.display = 'flex';
-            logoLink.style.alignItems = 'center';
-            logoLink.style.gap = '12px';
+            // Force logo link styling with !important equivalent
+            const logoStyles = {
+                textDecoration: 'none',
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                height: 'auto'
+            };
+            
+            Object.assign(logoLink.style, logoStyles);
         }
         
         if (logoText) {
             // Force logo text styling
-            logoText.style.fontFamily = "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
-            logoText.style.fontWeight = "700";
-            logoText.style.fontSize = "1.5rem";
-            logoText.style.color = "#4a90e2";
-            logoText.style.textDecoration = "none";
-            logoText.style.margin = "0";
-            logoText.style.padding = "0";
-            logoText.style.border = "none";
-            logoText.style.flexShrink = "0";
-            logoText.style.whiteSpace = "nowrap";
+            const textStyles = {
+                fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+                fontWeight: "700",
+                fontSize: "1.5rem",
+                color: "#4a90e2",
+                textDecoration: "none",
+                margin: "0",
+                padding: "0",
+                border: "none",
+                flexShrink: "0",
+                whiteSpace: "nowrap",
+                lineHeight: "1",
+                verticalAlign: "baseline"
+            };
+            
+            Object.assign(logoText.style, textStyles);
         }
+        
+        // Fix nav links alignment
+        navLinks.forEach(link => {
+            Object.assign(link.style, {
+                display: 'flex',
+                alignItems: 'center',
+                height: '40px',
+                lineHeight: '1',
+                whiteSpace: 'nowrap',
+                verticalAlign: 'middle'
+            });
+        });
     }
     
     function setActivePage() {
@@ -145,6 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Optimized navigation with preloading
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
@@ -153,20 +259,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (href && href !== currentPath && href.endsWith('.html')) {
                     e.preventDefault();
 
-                    // animasi fade (boleh tetap dipakai)
-                    this.style.opacity = '0.7';
-                    this.style.pointerEvents = 'none';
-                    document.body.style.opacity = '0.95';
-                    document.body.style.transition = 'opacity 0.2s ease';
+                    // Minimal animation untuk feedback
+                    this.style.opacity = '0.8';
+                    this.style.transform = 'scale(0.98)';
+                    this.style.transition = 'all 0.1s ease';
 
+                    // Navigate immediately
                     setTimeout(() => {
                         window.location.href = href;
-                    }, 200);
+                    }, 100); // Reduced delay
+                }
+            });
+            
+            // Preload on hover
+            link.addEventListener('mouseenter', function() {
+                const href = this.getAttribute('href');
+                if (href && href.endsWith('.html')) {
+                    const preloadLink = document.createElement('link');
+                    preloadLink.rel = 'prefetch';
+                    preloadLink.href = href;
+                    document.head.appendChild(preloadLink);
                 }
             });
         });
-
         
+        // Outside click handler
         document.addEventListener('click', function(event) {
             const isClickInsideNav = navMenu.contains(event.target);
             const isClickOnHamburger = hamburger.contains(event.target);
@@ -178,6 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Escape key handler
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && navMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
@@ -186,6 +304,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Scroll handler with throttling
         let ticking = false;
         const updateNavbar = () => {
             if (window.scrollY > 50) {
@@ -201,28 +320,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 requestAnimationFrame(updateNavbar);
                 ticking = true;
             }
-        });
-        
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                const currentPath = window.location.pathname.split('/').pop();
-                
-                if (href && href !== currentPath && href.endsWith('.html')) {
-                    e.preventDefault();
-                    
-                    this.style.opacity = '0.7';
-                    this.style.pointerEvents = 'none';
-                    
-                    document.body.style.opacity = '0.95';
-                    document.body.style.transition = 'opacity 0.2s ease';
-                    
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 200);
-                }
-            });
         });
         
         console.log('✅ Navbar functionality initialized');
@@ -256,32 +353,63 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.insertAdjacentHTML('afterbegin', fallbackNavbar);
         
-        setTimeout(() => {
+        // Immediate styling
+        requestAnimationFrame(() => {
             ensureLogoStyling();
-        }, 100);
+            setupNavbar();
+        });
         
-        setupNavbar();
         console.log('⚠️ Fallback navbar loaded');
     }
     
     function preloadResources() {
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = 'navbar.html';
-        document.head.appendChild(link);
+        // Preload navbar HTML
+        const navbarLink = document.createElement('link');
+        navbarLink.rel = 'prefetch';
+        navbarLink.href = 'navbar.html';
+        document.head.appendChild(navbarLink);
         
+        // Preload logo image
         const logoImg = new Image();
-        logoImg.src = '../assets/images/sehatsari.png';
+        logoImg.src = 'assets/images/sehatsari.png';
+        
+        // Preload font if not loaded
+        if (!document.documentElement.classList.contains('fonts-loaded')) {
+            const fontLink = document.createElement('link');
+            fontLink.rel = 'preload';
+            fontLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap';
+            fontLink.as = 'style';
+            document.head.appendChild(fontLink);
+        }
     }
     
+    // Start immediately
     preloadResources();
-    loadNavbar();
+    
+    // Load navbar without waiting
+    if (document.readyState === 'loading') {
+        loadNavbar();
+    } else {
+        setTimeout(loadNavbar, 0);
+    }
 });
 
+// Fallback for older browsers
 if (!('fonts' in document)) {
     window.addEventListener('load', () => {
-        setTimeout(() => {
-            document.documentElement.classList.add('fonts-loaded');
-        }, 1000);
+        document.documentElement.classList.add('fonts-loaded');
     });
 }
+
+// Page visibility optimization
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden && !window.navbarCache) {
+        // Preload navbar when page becomes visible
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                window.navbarCache = data;
+            })
+            .catch(() => {});
+    }
+});
