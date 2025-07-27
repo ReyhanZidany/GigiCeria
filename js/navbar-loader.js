@@ -146,12 +146,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = '';
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                const currentPath = window.location.pathname.split('/').pop();
+
+                if (href && href !== currentPath && href.endsWith('.html')) {
+                    e.preventDefault();
+
+                    // animasi fade (boleh tetap dipakai)
+                    this.style.opacity = '0.7';
+                    this.style.pointerEvents = 'none';
+                    document.body.style.opacity = '0.95';
+                    document.body.style.transition = 'opacity 0.2s ease';
+
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 200);
+                }
             });
         });
+
         
         document.addEventListener('click', function(event) {
             const isClickInsideNav = navMenu.contains(event.target);
@@ -220,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="nav-container">
                     <div class="nav-logo">
                         <a href="index.html" class="logo-link">
-                            <img src="../assets/images/sehatsari.png" alt="SehatSari Logo" class="logo-img" onerror="this.style.display='none'">
+                            <img src="assets/images/sehatsari.png" alt="SehatSari Logo" class="logo-img" onerror="this.style.display='none'">
                             <h2 class="logo-text">GigiPintar</h2>
                         </a>
                     </div>

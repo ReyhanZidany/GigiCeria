@@ -217,6 +217,4 @@ document.addEventListener('DOMContentLoaded', function() {
     window.achievements.check();
     
     console.log('🦷 GigiPintar Padangsari loaded successfully!');
-    console.log('👤 Current user: ReyhanZidany');
-    console.log('📅 Current date: 2025-07-23 16:10:02 UTC');
 });
