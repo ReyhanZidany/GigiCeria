@@ -6,70 +6,70 @@ document.addEventListener('DOMContentLoaded', function() {
             options: ["1 kali", "2 kali", "3 kali", "4 kali"],
             correct: 1,
             explanation: "Sikat gigi sebaiknya dilakukan 2 kali sehari: pagi setelah sarapan dan malam sebelum tidur.",
-            timeLimit: 15
+            timeLimit: 30
         },
         {
             question: "Berapa lama waktu yang dibutuhkan untuk menyikat gigi dengan benar?",
             options: ["30 detik", "1 menit", "2 menit", "5 menit"],
             correct: 2,
             explanation: "Menyikat gigi yang benar membutuhkan waktu minimal 2 menit untuk membersihkan semua permukaan gigi.",
-            timeLimit: 15
+            timeLimit: 30
         },
         {
             question: "Bagian gigi mana yang sering terlupa saat menyikat gigi?",
             options: ["Gigi depan", "Gigi samping", "Gigi belakang", "Semua sama"],
             correct: 2,
             explanation: "Gigi belakang (geraham) sering terlupa karena sulit dijangkau, padahal bagian ini penting untuk dibersihkan.",
-            timeLimit: 12
+            timeLimit: 25
         },
         {
             question: "Apa yang terjadi jika kita jarang menyikat gigi?",
             options: ["Gigi menjadi putih", "Gigi berlubang", "Gigi bertambah kuat", "Tidak ada efeknya"],
             correct: 1,
             explanation: "Jarang menyikat gigi menyebabkan penumpukan bakteri yang dapat merusak gigi dan menyebabkan gigi berlubang.",
-            timeLimit: 10
+            timeLimit: 20
         },
         {
             question: "Makanan mana yang BAIK untuk kesehatan gigi?",
             options: ["Permen", "Coklat", "Susu", "Minuman bersoda"],
             correct: 2,
             explanation: "Susu mengandung kalsium yang sangat baik untuk memperkuat gigi dan tulang.",
-            timeLimit: 12
+            timeLimit: 25
         },
         {
             question: "Kapan waktu yang tepat untuk mengganti sikat gigi?",
             options: ["Setiap bulan", "Setiap 3 bulan", "Setiap 6 bulan", "Setiap tahun"],
             correct: 1,
             explanation: "Sikat gigi sebaiknya diganti setiap 3 bulan atau ketika bulu sikat sudah rusak/melebar.",
-            timeLimit: 15
+            timeLimit: 30
         },
         {
             question: "Gerakan menyikat gigi yang benar adalah:",
             options: ["Maju mundur kuat", "Memutar kecil dan lembut", "Naik turun cepat", "Acak tidak beraturan"],
             correct: 1,
             explanation: "Gerakan memutar kecil dan lembut adalah teknik yang benar untuk membersihkan gigi tanpa melukai gusi.",
-            timeLimit: 18
+            timeLimit: 30
         },
         {
             question: "Selain menyikat gigi, apa lagi yang penting untuk kesehatan mulut?",
             options: ["Makan permen", "Berkumur dengan air", "Minum kopi", "Mengunyah es"],
             correct: 1,
             explanation: "Berkumur dengan air setelah makan membantu membersihkan sisa makanan dan menjaga kebersihan mulut.",
-            timeLimit: 14
+            timeLimit: 25
         },
         {
             question: "Apa fungsi pasta gigi saat menyikat gigi?",
             options: ["Membuat rasa enak", "Membersihkan dan melindungi gigi", "Membuat busa banyak", "Tidak ada fungsinya"],
             correct: 1,
             explanation: "Pasta gigi mengandung fluoride dan bahan pembersih yang membantu membersihkan dan melindungi gigi dari kerusakan.",
-            timeLimit: 16
+            timeLimit: 30
         },
         {
             question: "Seberapa sering sebaiknya kita periksa ke dokter gigi?",
             options: ["Setiap bulan", "Setiap 6 bulan", "Setiap 2 tahun", "Hanya saat sakit gigi"],
             correct: 1,
             explanation: "Pemeriksaan rutin ke dokter gigi setiap 6 bulan membantu mencegah dan mendeteksi masalah gigi sejak dini.",
-            timeLimit: 13
+            timeLimit: 30
         }
     ];
     

@@ -294,6 +294,8 @@ body {
     box-shadow: var(--shadow-heavy);
     transition: var(--transition);
     will-change: transform;
+    text-decoration: none;
+    color: inherit;
 }
 
 .feature-card:hover, .stat-card:hover {
@@ -325,6 +327,27 @@ body {
     color: #666;
     font-display: swap;
 }
+
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.team-member-full {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.team-member-full img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 
 /* Page Header */
 .page-header {
